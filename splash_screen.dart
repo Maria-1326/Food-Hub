@@ -1,6 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:splash_screens/screens/welcome_screen.dart';
+import 'package:get/get.dart';
+import 'package:get_x/scr/common_widgets/images.dart';
+import 'package:get_x/scr/features/authentication/screens/Login/welcome_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -8,67 +11,40 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 3), () {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => WelcomeScreen(),
-          ));
+      Get.to(const WelcomeScreen());
     });
-
     return Scaffold(
       backgroundColor: const Color(0xffFE724C),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 200),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height * .15,
-                      width: MediaQuery.of(context).size.width * .35,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Image.network("images/Group 18084.png"),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .01,
-                    ),
-                    RichText(
-                        text: const TextSpan(children: [
-                      TextSpan(
-                          text: "Food",
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white)),
-                      TextSpan(
-                          text: " Hub",
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700,
-                              color: Color(0xffFFC7B7)))
-                    ])),
-                  ]),
-              const Expanded(child: SizedBox(height: double.infinity)),
-              SizedBox(
-                width: MediaQuery.of(context).size.height * .2,
-                child: LinearProgressIndicator(
-                  backgroundColor: const Color(0xffFE724C),
-                  borderRadius: BorderRadius.circular(6),
-                  color: Colors.white,
-                  minHeight: 2,
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * .1,
-              )
-            ],
+      body: Stack(alignment: Alignment.center, children: [
+        Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+                height: Get.height * .150,
+                width: Get.width * .160,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(24)),
+                child: Image.asset(Logo)),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Image.asset(Font)
+        ]),
+        SizedBox(height: Get.height * .5),
+        Positioned(
+          bottom: 20,
+          child: SizedBox(
+            width: Get.width * .2,
+            child: LinearProgressIndicator(
+              backgroundColor: Colors.white,
+              color: const Color(0xffFE724C),
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
         ),
-      ),
+      ]),
     );
   }
 }
